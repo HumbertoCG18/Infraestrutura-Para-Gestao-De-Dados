@@ -1,0 +1,11 @@
+"Para a Consulta E, foi criado o cluster FLIGHT_BOOKING_CLUSTER usando o comando:
+
+sql
+
+CREATE CLUSTER flight_booking_cluster (flight_id NUMBER) SIZE 1000 HASHKEYS 10000;
+CREATE INDEX idx_flight_booking_cluster ON CLUSTER flight_booking_cluster;
+
+
+Embora o cluster tenha sido criado com sucesso, devido às limitações de espaço no tablespace ALUNOS, optei por simular o comportamento do cluster usando hints específicos do Oracle. A consulta utiliza o hint USE_HASH(b) para simular o acesso hash que seria obtido se as tabelas AIR_FLIGHTS e AIR_BOOKINGS estivessem fisicamente armazenadas no cluster. Adicionalmente, os hints ORDERED e LEADING(f) garantem que a sequência de junções seja realizada conforme especificado, similar ao que ocorreria em um acesso em cluster hash.
+
+A consulta também juntar três tabelas que estariam 'fora do cluster' (AIR_PASSENGERS, AIR_AIRLINES e AIR_AIRPORTS), demonstrando como seria a integração entre tabelas clusterizadas e não-clusterizadas em um ambiente real."
